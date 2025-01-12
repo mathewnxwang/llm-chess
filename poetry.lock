@@ -25,6 +25,20 @@ files = [
 chess = ">=1,<2"
 
 [[package]]
+name = "python-dotenv"
+version = "1.0.1"
+description = "Read key-value pairs from a .env file and set them as environment variables"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "python-dotenv-1.0.1.tar.gz", hash = "sha256:e324ee90a023d808f1959c46bcbc04446a10ced277783dc6ee09987c37ec10ca"},
+    {file = "python_dotenv-1.0.1-py3-none-any.whl", hash = "sha256:f7b63ef50f1b690dddf550d03497b66d609393b40b564ed0d674909a68ebf16a"},
+]
+
+[package.extras]
+cli = ["click (>=5.0)"]
+
+[[package]]
 name = "stockfish"
 version = "3.28.0"
 description = "Wraps the open-source Stockfish chess engine for easy integration into python."
@@ -38,4 +52,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "68b32d7c772b4e558a0662c66df282d042bc6029f0debc8326bb8f9e3961234d"
+content-hash = "fdb1d36fc6e056b9f5071674e5c9a589d10721ee03d596267fb24ff9aabf8426"

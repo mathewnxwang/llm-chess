@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.12"
 python-chess = "^1.999"
 stockfish = "^3.28.0"
+python-dotenv = "^1.0.1"
 
 
 [build-system]

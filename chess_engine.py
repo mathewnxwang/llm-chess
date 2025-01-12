@@ -1,5 +1,7 @@
 import chess
 import chess.engine
+import chess.pgn
+import io
 
 class ChessEngine:
 
@@ -43,7 +45,11 @@ class ChessEngine:
 
 if __name__ == "__main__":
     engine = ChessEngine(skill_level=10)
+    weak_engine = ChessEngine(skill_level=1)
     board = chess.Board()
+
+    game = chess.pgn.Game()
+    node = game
     
     while not board.is_game_over():
         
@@ -53,11 +59,26 @@ if __name__ == "__main__":
             print(f"Engine's move: {move}")
 
         else:
-            engine.get_and_execute_user_move(board)
+            move = weak_engine.get_best_move(board)
+            board.push(move)
+            print(f"Weak engine's move: {move}")
+            # engine.get_and_execute_user_move(board)
+
+        node = node.add_variation(board.move_stack[-1])
 
         print(board)
     
     engine.close()
+    weak_engine.close()
 
     print("Game over.")
     print(board.result())
+
+    game.headers["Result"] = board.result()
+
+    pgn_string = io.StringIO()
+    exporter = chess.pgn.FileExporter(pgn_string)
+    game.accept(exporter)
+
+    print("Game PGN:")
+    print(pgn_string.getvalue())
