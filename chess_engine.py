@@ -17,6 +17,25 @@ class ChessEngine:
         result = self.engine.play(board, chess.engine.Limit(time=time_limit))
         return result.move
 
+    def get_and_execute_user_move(self, board: chess.Board) -> None:
+
+        while True:
+
+            move_str = input("Enter your move: ")
+
+            try:
+                move = chess.Move.from_uci(move_str)
+            except chess.InvalidMoveError:
+                print("Invalid move notation. Try again.")
+                continue
+
+            if board.is_legal(move):
+                board.push(move)
+                return
+            
+            else:
+                print("Illegal move. Try again.")
+
     def close(self):
         self.engine.quit()
 
@@ -32,10 +51,8 @@ if __name__ == "__main__":
             print(f"Engine's move: {move}")
 
         else:
-            move = input("Enter your move: ")
-            move = chess.Move.from_uci(move)
-            board.push(move)
-        
+            engine.get_and_execute_user_move(board)
+
         print(board)
     
     engine.close()
