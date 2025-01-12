@@ -24,17 +24,19 @@ class ChessEngine:
             move_str = input("Enter your move: ")
 
             try:
-                move = chess.Move.from_uci(move_str)
+                move: chess.Move = board.parse_san(move_str)
+                break
             except chess.InvalidMoveError:
                 print("Invalid move notation. Try again.")
                 continue
-
-            if board.is_legal(move):
-                board.push(move)
-                return
-            
-            else:
+            except chess.IllegalMoveError:
                 print("Illegal move. Try again.")
+                continue
+            except chess.AmbiguousMoveError:
+                print("Ambiguous move. Try again.")
+                continue
+
+        board.push(move)
 
     def close(self):
         self.engine.quit()
